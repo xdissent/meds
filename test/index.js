@@ -5,9 +5,8 @@
 
 var reds = require('../')
   , should = require('should')
-  , redis = require('redis')
-  , search = reds.createSearch('reds')
-  , db = redis.createClient();
+  , MongoClient = require('mongodb').MongoClient
+  , search = reds.createSearch('reds');
 
 var start = new Date;
 
@@ -54,17 +53,19 @@ reds
   .metaphoneKeys('foobar', ['foo', 'bar', 'baz'])
   .should.eql(['foobar:word:F', 'foobar:word:BR', 'foobar:word:BS']);
 
-db.flushdb(function(){
-  search
-    .index('Tobi wants 4 dollars', 0)
-    .index('Loki is a ferret', 2)
-    .index('Tobi is also a ferret', 3)
-    .index('Jane is a bitchy ferret', 4)
-    .index('Tobi is employed by LearnBoost', 5, test)
-    .index('computing stuff', 6)
-    .index('simple words do not mean simple ideas', 7)
-    .index('The dog spoke the words, much to our unbelief.', 8)
-    .index('puppy dog eagle puppy frog puppy dog simple', 9);
+MongoClient.connect(process.env.MONGO_URL, function(err, db){
+  db.collection('reds').remove({}, function(){
+    search
+      .index('Tobi wants 4 dollars', '0')
+      .index('Loki is a ferret', '2')
+      .index('Tobi is also a ferret', '3')
+      .index('Jane is a bitchy ferret', '4')
+      .index('Tobi is employed by LearnBoost', '5', test)
+      .index('computing stuff', '6')
+      .index('simple words do not mean simple ideas', '7')
+      .index('The dog spoke the words, much to our unbelief.', '8')
+      .index('puppy dog eagle puppy frog puppy dog simple', '9');
+  });
 });
 
 function test() {
