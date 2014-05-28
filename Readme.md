@@ -2,7 +2,7 @@
 
 meds is a fork of [reds](https://github.com/visionmedia/reds) with MongoDB
 support (rather than Redis as in reds). Please see the
-[red documentation](https://github.com/visionmedia/reds) for API details. The
+[reds documentation](https://github.com/visionmedia/reds) for API details. The
 only difference between reds and meds is meds needs a `process.env.MONGO_URL`.
 And the name is meds.
 
@@ -12,7 +12,7 @@ And the name is meds.
 
 ## Benchmarks
 
-Quoting red's README: "Nothing scientific but"...
+Quoting reds' README: "Nothing scientific but"...
 
 ### Reds
 
