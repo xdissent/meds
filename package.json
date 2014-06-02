@@ -1,6 +1,6 @@
 {
   "name": "meds",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "MongoDB search for node.js",
   "keywords": [
     "mongodb",
